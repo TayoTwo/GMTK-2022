@@ -28,7 +28,6 @@ public class BoardSpace : MonoBehaviour
 
             case SpaceType.Basic:
             
-
                 break;
             case SpaceType.Enemy:
 

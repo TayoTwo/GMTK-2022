@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7859593265102861704}
+  - component: {fileID: 6270065111772484745}
   m_Layer: 0
   m_Name: EvilBunny
   m_TagString: Untagged
@@ -116,3 +117,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6270065111772484745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3260235730022472233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505dc00996665ff48953491d73a15b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Evil Bunny
+  maxHealth: 10
+  currentHealth: 10
+  numberOfDice: 1

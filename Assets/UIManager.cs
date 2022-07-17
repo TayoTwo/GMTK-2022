@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public void StartEncouncter(EnemyStats enemy){
 
         encounterUI.SetActive(true);
+        textBox.text = "A " + enemy.name + " attacked!";
 
     }
 

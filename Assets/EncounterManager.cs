@@ -8,7 +8,8 @@ public enum BattleState {
     PLAYER,
     ENEMY,
     WON,
-    LOST
+    LOST,
+    EXIT
 
 }
 
@@ -42,6 +43,7 @@ public class EncounterManager : MonoBehaviour
         currentState = BattleState.START;
         enemy = e;
 
+        player.GetComponent<GridPlayerMovement>().actionable = false;
         player.transform.position -= new Vector3(unitLength/2,0,0);
         enemy.transform.position += new Vector3(unitLength/2,0,0);
 
@@ -54,6 +56,7 @@ public class EncounterManager : MonoBehaviour
         currentState = BattleState.WON;
 
         uiManager.EndEncounter();
+        player.GetComponent<GridPlayerMovement>().actionable = true;
 
     }
 
@@ -62,6 +65,7 @@ public class EncounterManager : MonoBehaviour
         currentState = BattleState.LOST;
 
         uiManager.EndEncounter();
+        player.GetComponent<GridPlayerMovement>().actionable = true;
 
     }
 
