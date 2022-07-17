@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2047464475, guid: d13c88bf16bd40e40ba9d1938e1e9877, type: 3}
+  m_Sprite: {fileID: 572869112, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,3 +133,10 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 10
   numberOfDice: 1
+  bunnySprites:
+  - {fileID: 572869112, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
+  - {fileID: -1184625636, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
+  - {fileID: -835499469, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
+  - {fileID: -798730935, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
+  - {fileID: -491570262, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}
+  - {fileID: -1187530261, guid: a4e7e3d7b14fe9d489b96aa6a45a9ed9, type: 3}

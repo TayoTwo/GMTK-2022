@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 642481747059614256}
   - component: {fileID: 642481747059614257}
-  - component: {fileID: 642481747059614270}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -26,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642481747059614259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ce1c5d52144988e4391f44dceab9916c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,22 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &642481747059614270
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642481747059614259}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &642481747124759218
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +97,7 @@ GameObject:
   - component: {fileID: 642481747124759217}
   - component: {fileID: 642481747124759230}
   - component: {fileID: 1680557927686822150}
+  - component: {fileID: 4439434334878974964}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -204,3 +188,23 @@ MonoBehaviour:
   maxHealth: 20
   currentHealth: 20
   numberOfDice: 2
+--- !u!114 &4439434334878974964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642481747124759218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d6c734cac0fb4479ca95a261982b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changePoseTime: 0
+  playerPoses:
+  - {fileID: 21300000, guid: 9f93093ddf4667240a3f7a54213a2052, type: 3}
+  - {fileID: 21300000, guid: f458fc55e78ea7740a9b7bf9e7ef62dd, type: 3}
+  - {fileID: 21300000, guid: ce1c5d52144988e4391f44dceab9916c, type: 3}
+  - {fileID: 21300000, guid: 09004d8260ef185489e2f0981da55f9b, type: 3}
+  spriteRenderer: {fileID: 0}
+  direction: 0

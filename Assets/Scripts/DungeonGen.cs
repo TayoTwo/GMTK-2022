@@ -92,6 +92,12 @@ public class DungeonGen : MonoBehaviour
         SpawnStage();
 
     }
+
+    void Start(){
+
+        FindObjectOfType<GridPlayerMovement>().dungeonGen = this;
+
+    }
     void GenerateTiles(){
 
         for(int i = 0;i < maxIterations;i++){
@@ -141,7 +147,7 @@ public class DungeonGen : MonoBehaviour
 
                         }
 
-                        Debug.Log("PLACING " + tileIndex);
+                        //Debug.Log("PLACING " + tileIndex);
                         grid[w.position.x,w.position.y] = tileIndex;
 
                     }
@@ -200,7 +206,7 @@ public class DungeonGen : MonoBehaviour
 
             for(int x = 0;x < grid.GetLength(0);x++){
 
-                Debug.Log(grid[x,y]);
+                //Debug.Log(grid[x,y]);
 
                 SpawnElement(x,y,tiles[grid[x,y]]);
 

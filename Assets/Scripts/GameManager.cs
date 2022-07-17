@@ -12,11 +12,23 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
+        GameObject p;
         dunGen = GetComponent<DungeonGen>();
         Vector3 center = (new Vector3(dunGen.centerOfGrid.x,dunGen.centerOfGrid.y,dunGen.offset.z / dunGen.unitLength) * dunGen.unitLength);
 
-        GameObject p = (GameObject)Instantiate(playerObj,center - dunGen.offset,Quaternion.identity);
+        if(FindObjectsOfType<GridPlayerMovement>().Length == 0){
+
+            p = (GameObject)Instantiate(playerObj,center - dunGen.offset,Quaternion.identity);
+
+        } else {
+
+            p = FindObjectOfType<GridPlayerMovement>().gameObject;
+            p.transform.position = center - dunGen.offset;
+
+        }
+
         p.GetComponent<GridPlayerMovement>().gridPosition = dunGen.centerOfGrid;
+
         
     }
 

@@ -20,6 +20,8 @@ public class EncounterManager : MonoBehaviour
     public PlayerStats player;
     public EnemyStats enemy;
     public BattleState currentState;
+    public bool midAction;
+    ScoreManager scoreManager;
     UIManager uiManager;
     int unitLength;
 
@@ -29,7 +31,8 @@ public class EncounterManager : MonoBehaviour
 
         player = FindObjectOfType<PlayerStats>();
         unitLength = FindObjectOfType<DungeonGen>().unitLength;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = GetComponent<UIManager>();
+        scoreManager = GetComponent<ScoreManager>();
         
     }
 
@@ -58,9 +61,7 @@ public class EncounterManager : MonoBehaviour
 
         currentState = BattleState.START;
         uiManager.ChangeText("A " + e.name + " attacked");
-
-        enemy.currentHealth = enemy.maxHealth;
-        player.currentHealth = player.maxHealth;
+        player.GetComponent<PlayerAnimationController>().direction = 1;
 
         player.GetComponent<GridPlayerMovement>().actionable = false;
         player.transform.position = tile.transform.position - new Vector3(unitLength/2,0,0);
@@ -84,6 +85,7 @@ public class EncounterManager : MonoBehaviour
     public void PlayerAttack(){
 
         if(currentState != BattleState.PLAYER) return;
+        midAction = true;
         StartCoroutine(PlayerAttackCoro());
 
     }
@@ -106,6 +108,7 @@ public class EncounterManager : MonoBehaviour
         uiManager.enemyHP.value = enemy.currentHealth / enemy.maxHealth;
 
         yield return new WaitForSeconds(2f);
+        midAction = false;
 
         if(isDead){
 
@@ -118,6 +121,7 @@ public class EncounterManager : MonoBehaviour
             StartCoroutine(EnemyAttackCoro());
 
         }
+
 
     }
 
@@ -175,6 +179,7 @@ public class EncounterManager : MonoBehaviour
     public void Win(){
 
         currentState = BattleState.WON;
+        scoreManager.currentScore++;
 
         uiManager.EndEncounter();
         player.GetComponent<GridPlayerMovement>().actionable = true;
@@ -186,7 +191,7 @@ public class EncounterManager : MonoBehaviour
         currentState = BattleState.LOST;
 
         uiManager.EndEncounter();
-        player.GetComponent<GridPlayerMovement>().actionable = true;
+        Destroy(player.gameObject);
 
     }
 

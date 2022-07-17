@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridPlayerMovement : MonoBehaviour
 {
     public bool actionable;
     public float movSpeed;
     public Vector2Int gridPosition;
-    DungeonGen dungeonGen;
+    PlayerAnimationController playerAnimationController;
+    public DungeonGen dungeonGen;
     InputMaster inputMaster;
     Vector2 inputDir;
     float moveProgress = 1;
@@ -21,8 +23,12 @@ public class GridPlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dungeonGen = FindObjectOfType<DungeonGen>();
+
+        DontDestroyOnLoad(gameObject);
+
+        playerAnimationController = GetComponent<PlayerAnimationController>();
         inputMaster.Player.Movement.performed += ctx => OnMovePress(ctx.ReadValue<Vector2>());
+        inputMaster.Player.Restart.performed += ctx => Restart();
         
     }
 
@@ -59,6 +65,36 @@ public class GridPlayerMovement : MonoBehaviour
 
         if(moveProgress >= 1){
 
+            //Debug.Log(moveDir);
+
+            switch(moveDir.x){
+
+                case -1:
+
+                    playerAnimationController.direction = 3;
+                    break;
+
+                case 1:
+
+                    playerAnimationController.direction = 1;
+                    break;
+
+            }
+
+            switch(moveDir.y){
+
+                case -1:
+
+                    playerAnimationController.direction = 2;
+                    break;
+
+                case 1:
+
+                    playerAnimationController.direction = 0;
+                    break;
+
+            }
+
             if(dungeonGen.grid[intendedMove.x,intendedMove.y] != 0){
             
                 Vector2 targetPos = new Vector2(intendedMove.x - dungeonGen.centerOfGrid.x,intendedMove.y- dungeonGen.centerOfGrid.y) * dungeonGen.unitLength;
@@ -94,5 +130,10 @@ public class GridPlayerMovement : MonoBehaviour
 
     }
 
+    void Restart(){
+        if(!actionable) return;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
 
 }

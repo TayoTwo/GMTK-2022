@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
 
     public void AttackClick(){
 
+        if(em.midAction) return;
         Debug.Log("Attack Clicked");
         em.PlayerAttack();
 
@@ -64,8 +66,8 @@ public class UIManager : MonoBehaviour
     public void StartEncounter(PlayerStats player,EnemyStats enemy){
 
         encounterUI.SetActive(true);
-        playerHP.value = player.currentHealth;
-        enemyHP.value = enemy.currentHealth;
+        playerHP.value = player.currentHealth / player.maxHealth;
+        enemyHP.value = enemy.currentHealth / enemy.maxHealth;
 
     }
 
@@ -88,5 +90,10 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void OnRestart(){
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
 
 }
