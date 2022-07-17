@@ -1,44 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
 
     public GameObject encounterUI;
-    public TMP_Text textBox;
+    public GameObject loseScreen;
+    public TMP_Text stateText;
+    public Slider playerHP;
+    public Slider enemyHP;
+    public Transform playerUI;
+    public Transform enemyUI;
+    public Vector3 UIOffset;
+    public Die[] playerDice;
+    public Die enemyDie;
+    EncounterManager em;
     float delayPerCharacter;
     bool canGoNext;
 
     // Start is called before the first frame update
     void Start(){
 
+        em = FindObjectOfType<EncounterManager>();
         encounterUI.SetActive(false);
+
+    }
+
+    public void UpdateDice(int[] diceRoll,bool isPlayer){
+
+        if(isPlayer){
+
+            for(int i = 0; i < diceRoll.Length;i++){
+
+                playerDice[i].value = diceRoll[i];
+
+            }
+
+        } else {
+
+            enemyDie.value = diceRoll[0];
+
+        }
 
     }
 
     public void AttackClick(){
 
         Debug.Log("Attack Clicked");
-        //Roll Dice
-
-        //Show Dice Rolling animation
-
-    
+        em.PlayerAttack();
 
     }
 
     public void RunClick(){
 
         Debug.Log("Run Clicked");
+        em.Run();
 
     }
 
-    public void StartEncouncter(EnemyStats enemy){
+    public void StartEncounter(PlayerStats player,EnemyStats enemy){
 
         encounterUI.SetActive(true);
-        textBox.text = "A " + enemy.name + " attacked!";
+        playerHP.value = player.currentHealth;
+        enemyHP.value = enemy.currentHealth;
 
     }
 
@@ -48,9 +75,15 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ChangeText(string script){
+    public void ShowLoseScreen(){
 
-        textBox.text = script;
+        loseScreen.SetActive(true);
+
+    }
+
+    public void ChangeText(string text){
+
+        stateText.text = text;
         //Play a sound?
 
     }

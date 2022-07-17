@@ -10,4 +10,15 @@ public class EnemyStats : MonoBehaviour
     public float currentHealth;
     public int numberOfDice;
 
+    public bool TakeDamage(int dmg){
+
+        currentHealth -= dmg;
+
+        if(currentHealth <= 0) 
+            return true;
+        else 
+            return false;
+        
+    }
+
 }
