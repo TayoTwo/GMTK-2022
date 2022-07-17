@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     DungeonGen dunGen;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         dunGen = GetComponent<DungeonGen>();

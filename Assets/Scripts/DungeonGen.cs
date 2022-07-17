@@ -62,8 +62,9 @@ public class DungeonGen : MonoBehaviour
     public Vector3 offset;
     //public int stage;
     [Header("Objects")]
-    public GameObject tile;
-    public GameObject[] wallTypes;
+    public GameObject wallTile;
+    public GameObject[] tiles;
+    public float[] tileChances;
 
     [Header("Walkers Parameters")]
     public int maxIterations = 100;
@@ -109,12 +110,42 @@ public class DungeonGen : MonoBehaviour
                 //Place tile at walker position
                 if(w.position.x == 0 || w.position.x == dimensions[0] - 1 || w.position.y == 0 || w.position.y == dimensions[1] - 1){
 
+                    Debug.Log("PLACING WALL");
                     grid[w.position.x,w.position.y] = 0;
 
                 } else {
 
-                    //Debug.Log(w.position.x + ":" +w.position.y);
-                    grid[w.position.x,w.position.y] = 1;
+                    //Debug.Log("PLACING OTHER");
+                    int tileIndex = grid[w.position.x,w.position.y];
+                    float value = Random.value;
+                    float biasTotal = 0;
+
+                    if(grid[w.position.x,w.position.y] != -1){
+
+                        foreach(float f in tileChances){
+
+                            biasTotal += f;
+
+                        }
+
+                        for(int j = 0; j < tiles.Length;j++){
+
+                            //Debug.Log(tileChances[j]/biasTotal);
+
+                            if(value < tileChances[j]/biasTotal){
+
+                                tileIndex = j;
+                                //Debug.Log(tileIndex);
+
+                            }
+
+                        }
+
+                        Debug.Log("PLACING " + tileIndex);
+                        grid[w.position.x,w.position.y] = tileIndex;
+
+                    }
+
 
                 }
 
@@ -169,42 +200,9 @@ public class DungeonGen : MonoBehaviour
 
             for(int x = 0;x < grid.GetLength(0);x++){
 
-                switch(grid[x,y]){
+                Debug.Log(grid[x,y]);
 
-                    case 0:
-
-                        // //Debug.Log(x + "-" + y);
-                        // int wallTypeIndex = 0;
-                        // //East
-                        // if(x < grid.GetLength(0) - 1 && grid[x+1,y] == 1) wallTypeIndex +=2;
-                        // //West
-                        // if(0 < x && grid[x-1,y] == 1) wallTypeIndex +=8;
-                        // //North
-                        // if(y < grid.GetLength(1) - 1 && grid[x,y+1] == 1) wallTypeIndex +=1;
-                        // //South
-                        // if(0 < y && grid[x,y-1] == 1) wallTypeIndex +=4;
-
-                        //Debug.Log(wallTypeIndex);
-
-                        // if(wallTypeIndex > 0 && wallTypeIndex < 15){ 
-                            
-                        //     SpawnElement(x,y,wallTypes[wallTypeIndex],0);
-
-                        // } else if(wallTypeIndex == 15){
-
-                        //     SpawnElement(x,y,tile,1);
-
-                        // }
-
-                        SpawnElement(x,y,wallTypes[0]);
-
-                        break;
-
-                    case 1: 
-                        SpawnElement(x,y,tile);
-                        break;
-
-                }
+                SpawnElement(x,y,tiles[grid[x,y]]);
 
             }
 
